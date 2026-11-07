@@ -1,0 +1,6 @@
+{
+  "name": "PORAN LIVE",
+  "description": "Real Facebook Live Streaming Application — Your Screen. Your Live. Your World.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
