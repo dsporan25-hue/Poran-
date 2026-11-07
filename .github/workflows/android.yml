@@ -43,10 +43,23 @@ jobs:
           sdkmanager --install "platform-tools" "platforms;android-36" "build-tools;36.0.0" || true
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci || npm install
 
       - name: Build web application
         run: npm run build
+
+      - name: Verify Web Assets Directory and index.html
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "::error::Configured web assets directory 'dist' was not found! 'npm run build' failed to produce the dist directory."
+            exit 1
+          fi
+          if [ ! -f "dist/index.html" ]; then
+            echo "::error::'dist/index.html' was not found in the web assets directory! Make sure your build produces index.html."
+            exit 1
+          fi
+          echo "Web assets directory 'dist' and 'dist/index.html' verified successfully."
+          ls -la dist/
 
       - name: Sync Capacitor Android
         run: npx cap sync android
